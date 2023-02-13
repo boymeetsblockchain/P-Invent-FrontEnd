@@ -14,6 +14,7 @@ import { getLoginStatus } from "./services/authService";
 import { SET_LOGIN } from "./redux/features/auth/authSlice";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import AddProduct from './pages/addProduct/AddProduct'
 axios.defaults.withCredentials= true;
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,11 @@ function App() {
           <Route path='/dashboard' element={ <Sidebar>
             <Layout>
               <Dashboard/>
+            </Layout>
+           </Sidebar>}/>
+           <Route path='/add-product' element={ <Sidebar>
+            <Layout>
+              <AddProduct/>
             </Layout>
            </Sidebar>}/>
         </Routes>
