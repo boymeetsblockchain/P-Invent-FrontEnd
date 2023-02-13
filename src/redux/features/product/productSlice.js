@@ -236,6 +236,7 @@ const productSlice = createSlice({
   },
 });
 
+
 export const { CALC_STORE_VALUE, CALC_OUTOFSTOCK, CALC_CATEGORY } =
   productSlice.actions;
 
