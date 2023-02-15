@@ -11,6 +11,12 @@ import {
   selectFilteredPoducts,
 } from "../../../redux/features/product/filterSlice";
 import ReactPaginate from "react-paginate";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import {
+  deleteProduct,
+  getProducts,
+} from "../../../redux/features/product/productSlice";
 function ProductList({products, isLoading}) {
 
   const dispatch = useDispatch();
@@ -45,7 +51,29 @@ function ProductList({products, isLoading}) {
      setItemOffset(newOffset);
    };
    //   End Pagination
-
+ 
+    // delete
+    const delProduct = async (id) => {
+      console.log(id);
+      await dispatch(deleteProduct(id));
+      await dispatch(getProducts());
+    };
+   const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Delete Product",
+      message: "Are you sure you want to delete this product.",
+      buttons: [
+        {
+          label: "Delete",
+          onClick: () => delProduct(id),
+        },
+        {
+          label: "Cancel",
+          // onClick: () => alert('Click No')
+        },
+      ],
+    });
+  };
   return (
   <div className="product-list">
     <hr />
@@ -111,6 +139,7 @@ function ProductList({products, isLoading}) {
                           <FaTrashAlt
                             size={20}
                             color={"red"}
+                            onClick={() => confirmDelete(_id)}
                           />
                         </span>
                       </td>
